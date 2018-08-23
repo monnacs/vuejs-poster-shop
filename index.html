@@ -20,12 +20,28 @@
     </div>
     <div class="main">
         <div class="products">
-            <p>Products go here.</p>
+            <div class="product" v-for="(item, index) in items">
+              <h4 class="product-title">{{ item.title }}</h4>
+              <button type="button" name="button" class="add-cart btn" v-on:click="addItem(index)">Add to Cart</button>
+            </div>
         </div>
         <div class="cart">
             <h2>Shopping Cart</h2>
-            <div>
-                No items in the cart.
+            <ul>
+              <li class="cart-item" v-for="item in cart">
+                <div class="item-title">
+                  {{ item.title }}
+                </div>
+                <span class="item-quantity">{{ item.price | currency }} x {{ item.quantity }}</span>
+                <button type="button" name="button" class="btn" v-on:click="inc(item)">+</button>
+                <button type="button" name="button" class="btn" v-on:click="dec(item)">-</button>
+              </li>
+            </ul>
+            <div class="" v-if="cart.length">
+              Total: {{ total | currency }}
+            </div>
+            <div class="empty-cart" v-else>
+              No items in the cart.
             </div>
         </div>
     </div>
@@ -33,6 +49,7 @@
 
 <!-- Scripts -->
 <script src="/reload/reload.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript" src="public/script.js"></script>
 
 </body>
